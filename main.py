@@ -9,7 +9,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import os
-os.environ['PYTHONSAFEPATH'] = '1'
+
 
 app = FastAPI()
 
@@ -54,9 +54,9 @@ def collecting(app_id: int):
         
                 writer.writerow([id,author,title,rating,text])
     if response.status_code == 200:
-        return "Successfully colected 100 reviews"
+        return "Successfully collected 100 reviews"
     else:
-        return f"Erorr {response.status_code}"
+        return f"Error {response.status_code}"
 
 
 
@@ -70,11 +70,11 @@ def analysis():
     #Average rating
     average_rating = df['Rating'].mean()
     
-    #Procent rating
+    #Percentage rating
     rating_result = df['Rating'].value_counts(normalize=True) * 100
     
 
-    #Sentiment analyze
+    #Sentiment analysis
     def get_sentiment(text):
         blob = TextBlob(str(text))
         score = blob.sentiment.polarity
