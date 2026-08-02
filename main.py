@@ -1,6 +1,8 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from fastapi import FastAPI
 import requests
-import matplotlib.pyplot as plt
 import csv
 import pandas as pd
 from textblob import TextBlob
@@ -9,14 +11,7 @@ from fastapi.responses import FileResponse
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-import matplotlib
 import os
-
-nltk_dir = '/tmp/nltk_data'
-os.makedirs(nltk_dir, exist_ok=True)
-nltk.data.path.append(nltk_dir)
-nltk.download('punkt_tab', download_dir=nltk_dir)
-
 
 app = FastAPI()
 
@@ -96,6 +91,10 @@ def analysis():
 
     df['Sentiment'] = df['Text'].apply(get_sentiment)
 
+    nltk_dir = '/tmp/nltk_data'
+    os.makedirs(nltk_dir, exist_ok=True)
+    nltk.data.path.append(nltk_dir)
+    nltk.download('punkt_tab', download_dir=nltk_dir)
     nltk.download('punkt', download_dir=nltk_dir)
     nltk.download('stopwords', download_dir=nltk_dir)
 
@@ -154,7 +153,6 @@ def get_analysis():
 def download():
     return FileResponse('/tmp/reviews.csv', media_type='text/csv', filename='reviews.csv')
 
-matplotlib.use('Agg')
 @app.get('/visualize')
 def visualize():
     df = pd.read_csv('/tmp/reviews.csv')
