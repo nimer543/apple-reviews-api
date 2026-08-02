@@ -1,6 +1,3 @@
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from fastapi import FastAPI
 import requests
 import csv
@@ -155,6 +152,9 @@ def download():
 
 @app.get('/visualize')
 def visualize():
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
     df = pd.read_csv('/tmp/reviews.csv')
     df['Rating'].value_counts().plot.pie(autopct='%1.1f%%')
     plt.savefig('/tmp/rating.png')
