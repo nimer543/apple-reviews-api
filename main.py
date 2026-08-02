@@ -9,6 +9,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import os
+os.environ['PYTHONSAFEPATH'] = '1'
 
 app = FastAPI()
 
