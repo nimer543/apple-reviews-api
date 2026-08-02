@@ -10,9 +10,12 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import matplotlib
+import os
 
-
-nltk.download('punkt_tab')
+nltk_dir = '/tmp/nltk_data'
+os.makedirs(nltk_dir, exist_ok=True)
+nltk.data.path.append(nltk_dir)
+nltk.download('punkt_tab', download_dir=nltk_dir)
 
 
 app = FastAPI()
@@ -33,7 +36,7 @@ def check_id(app_name: str):
 #Collecting reviews into csv
 
 def collecting(app_id: int):
-    file_name = 'reviews.csv'
+    file_name = '/tmp/reviews.csv'
     id = 0
     
 
@@ -69,7 +72,7 @@ def collecting(app_id: int):
 
 
 def analysis():
-    df = pd.read_csv('reviews.csv')
+    df = pd.read_csv('/tmp/reviews.csv')
 
     #Average rating
     average_rating = df['Rating'].mean()
@@ -93,8 +96,8 @@ def analysis():
 
     df['Sentiment'] = df['Text'].apply(get_sentiment)
 
-    nltk.download('punkt')
-    nltk.download('stopwords')
+    nltk.download('punkt', download_dir=nltk_dir)
+    nltk.download('stopwords', download_dir=nltk_dir)
 
     #Delete stop words
     stop_words = set(stopwords.words('english'))
@@ -149,13 +152,13 @@ def get_analysis():
 
 @app.get('/download')
 def download():
-    return FileResponse('reviews.csv', media_type='text/csv', filename='reviews.csv')
+    return FileResponse('/tmp/reviews.csv', media_type='text/csv', filename='reviews.csv')
 
 matplotlib.use('Agg')
 @app.get('/visualize')
 def visualize():
-    df = pd.read_csv('reviews.csv')
+    df = pd.read_csv('/tmp/reviews.csv')
     df['Rating'].value_counts().plot.pie(autopct='%1.1f%%')
-    plt.savefig('rating.png')
+    plt.savefig('/tmp/rating.png')
     plt.clf()
-    return FileResponse('rating.png', media_type='image/png')
+    return FileResponse('/tmp/rating.png', media_type='image/png')
