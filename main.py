@@ -130,17 +130,16 @@ def analysis():
 
 
 
-    
+@app.get('/check_id')
+def search_app_id(app_name: str):
+    result = check_id(app_name)
+    return {'id': result} 
 
 @app.get('/collecting')
 def collect_reviews(app_id: int):
   result = collecting(app_id)
   return {'reviews': result}
 
-@app.get('/check_id')
-def search_app_id(app_name: str):
-    result = check_id(app_name)
-    return {'id': result}
 
 @app.get('/analysis')
 def get_analysis():

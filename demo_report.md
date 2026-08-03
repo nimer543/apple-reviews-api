@@ -23,7 +23,7 @@ After filtering out standard English stopwords and punctuation, the NLTK process
 
 ## 4. Business Recommendations (Manual Analyst Review)
 Based on the raw data and automated API insights, the product and support teams should focus on two main areas:
-1. **Account Access & Customer Support**: The massive prevalence of words like "account(s)", "help", and "please" strongly indicates that users are getting locked out, banned, or hacked, and are desperately trying to reach customer support. The business needs to urgently improve the account recovery process and support response times.
-2. **AI Features Reception**: The presence of the word "ai" in negative reviews suggests that users are dissatisfied with recent Artificial Intelligence features or algorithm changes introduced to the platform. 
+1. Account Access & Customer Support: The massive prevalence of words like "account(s)", "help", and "please" strongly indicates that users are getting locked out, banned, or hacked, and are desperately trying to reach customer support. The business needs to urgently improve the account recovery process and support response times.
+2. AI Features Reception: The presence of the word "ai" in negative reviews suggests that users are dissatisfied with recent Artificial Intelligence features or algorithm changes introduced to the platform. 
 
 A visual representation of the rating distribution was successfully generated using the `/visualize` endpoint.
