@@ -8,6 +8,7 @@ A simple FastAPI service that collects reviews from the Apple App Store, calcula
 - Calculate average rating and rating distribution
 - Basic sentiment analysis using TextBlob
 - Extract top keywords from negative reviews (using NLTK for tokenization and stopword removal)
+- Generate a pie chart visualization of the rating distribution
 - Download the collected reviews as a CSV file
 
 ## Setup
@@ -34,8 +35,9 @@ You can test all endpoints in the browser at `http://127.0.0.1:8000/docs`.
 
 - `GET /check_id?app_name={name}` - Returns the app_id for a given app name.
 - `GET /collecting?app_id={id}` - Fetches 100 reviews and saves them to `reviews.csv`.
-- `GET /analyze` - Analyzes the CSV file and returns JSON with metrics, negative keywords, and a quick business insight.
+- `GET /analysis` - Analyzes the CSV file and returns JSON with metrics, negative keywords, and a quick business insight.
 - `GET /download` - Returns the `reviews.csv` file for download.
+- `GET /visualize` - Generates and returns image (`.png`) of the rating distribution using Pandas and Matplotlib.
 
 ## Notes / Design Decisions
 - I used the Apple iTunes RSS feed instead of web scraping because it's much faster, more stable, and doesn't require proxies.
